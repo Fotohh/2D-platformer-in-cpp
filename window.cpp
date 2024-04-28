@@ -1,64 +1,61 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "window.h"
+
 #include <string>
 #include <iostream>
 
-struct Contents {
-	GLFWwindow* window;
-	int width;
-	int height;
-	std::string title;
-};
-
-inline bool check_if_glad_not_exist() {
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		std::cout << "Failed to initialize glad!";
-		return true;
-	}
-	else return false;
-}
-
-inline void glad_window_frame_buffer(GLFWwindow*, int width, int height) {
+void buffer(GLFWwindow*, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
-inline void create_main_window(Contents& contents) {
-	while (!glfwWindowShouldClose(contents.window)) {
-
-		if (glfwGetKey(contents.window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-			glfwSetWindowShouldClose(contents.window, true);
-		}
-
-		//TODO add in game loop
-		//TODO add in character
-		//TODO add in movement
-
-		glfwSwapBuffers(contents.window);
-		glfwPollEvents();
-	}
-	glfwTerminate();
+Window::Window(int width, int height, const char* title) : title_(title), width_(width), height_(height) {
+	Window::CreateWindow(width, height, title);
 }
 
-inline GLFWwindow* create_glad_window(int width, int height, const char* title, Contents& contents) {
+bool Window::CheckGlad(void) {
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		std::cout << "Failed to initialize glad!";
+		return false;
+	}
+	return true;
+}
 
-	contents.height = height;
-	contents.width = width;
-	contents.title = title;
+void Window::CreateWindow(int width, int height, const char* title) {
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	contents.window = glfwCreateWindow(width, height, title, nullptr, nullptr);
-	if (contents.window == nullptr) {
+	window_ = glfwCreateWindow(width, height, title, nullptr, nullptr);
+	if (window_ == nullptr) {
 		std::cout << "Failed to initialize window!" << std::endl;
 		glfwTerminate();
-		return nullptr;
+		return;
 	}
-	glfwMakeContextCurrent(contents.window);
-	glfwSetFramebufferSizeCallback(contents.window, glad_window_frame_buffer);
-	if (check_if_glad_not_exist()) return nullptr;
-	
-	return contents.window;
+
+	glfwMakeContextCurrent(window_);
+	glfwSetFramebufferSizeCallback(window_, buffer);
+	CheckGlad();
 }
+
+int Window::GetWidth(void) const {
+	return width_;
+}
+
+int Window::GetHeight(void) const {
+	return height_;
+}
+
+const std::string& Window::GetTitle(void) {
+	return title_;
+}
+
+GLFWwindow* Window::GetWindow(void) {
+	return window_;
+}
+
+Window::~Window(void) {
+	glfwDestroyWindow(window_);
+	glfwTerminate();
+}
+
