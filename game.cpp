@@ -1,7 +1,5 @@
 #include "game.h"
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 Game::Game(Window* window) : window_(window) {
 	
@@ -20,7 +18,7 @@ void Game::Update() {
 	float ticks = 60.f;
 	while (!WindowShouldClose()) {
 
-		float current_time = static_cast<float>(glfwGetTime());	
+		float current_time = static_cast<float>(GetTime());	
 		float dt = current_time - previous_time / (1000000000 / ticks);
 		previous_time = current_time;
 		
