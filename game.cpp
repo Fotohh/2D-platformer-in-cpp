@@ -18,11 +18,7 @@ void Game::Render() {
 void Game::Update() {
 	float previous_time = 0.f;
 	float ticks = 60.f;
-	while (!glfwWindowShouldClose(window_->GetWindow())) {
-
-		if (glfwGetKey(window_->GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-			glfwSetWindowShouldClose(window_->GetWindow(), true);
-		}
+	while (!WindowShouldClose()) {
 
 		float current_time = static_cast<float>(glfwGetTime());	
 		float dt = current_time - previous_time / (1000000000 / ticks);
@@ -39,8 +35,6 @@ void Game::Update() {
 		//TODO add in character
 		//TODO add in movement
 
-		glfwSwapBuffers(window_->GetWindow());
-		glfwPollEvents();
 	}
 }
 
