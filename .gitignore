@@ -1,3 +1,9 @@
 *.exe
 *.dsym
 main
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+x64/
