@@ -1,6 +1,6 @@
 #pragma once
 
-#include <src/raylib.h>
+#include <raylib.h>
 #include <string>
 
 class Window {

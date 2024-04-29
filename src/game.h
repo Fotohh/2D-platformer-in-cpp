@@ -1,7 +1,7 @@
 #pragma once
 
 #include "window.h"
-#include <src/raylib.h>
+#include <raylib.h>
 
 class Game {
 public:
