@@ -10,7 +10,7 @@ int main() {
 
 	Window window(600, 600, "App");
 
-	auto handler = GraphicHandler();
+	GraphicHandler handler;
 
 	window.Init(handler);
 

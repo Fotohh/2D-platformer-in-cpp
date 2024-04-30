@@ -13,22 +13,22 @@ enum GameObjectType
 class GameObject
 {
 public:
-	GameObject(int x, int y, const GameObjectType& type);
+	GameObject(int x, int y, const GameObjectType type);
 
 	~GameObject() = default;
 	
-	const GameObjectType& GetObjectType();
+	const GameObjectType GetObjectType();
 
-	void Render(Texture2D texture);
+	void Render();
 
 	void Tick();
 
-	int GetX();
+	const int GetX();
 
-	int GetY();
+	const int GetY();
 
 private:
-	const GameObjectType& type_;
+	const GameObjectType type_;
 	int x_;
 	int y_;
 };

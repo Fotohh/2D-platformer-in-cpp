@@ -12,20 +12,14 @@ public:
 
 	~GraphicHandler() = default;
 
-	std::vector<GameObject> GetObjects();
-
-	void AddObject(GameObject gameObject);
-
-	void RemoveObject(GameObject gameObject);
-
-	void RemoveObject(int index);
+	std::vector<GameObject&> GetObjects();
 
 	void Render();
 
 	void Tick();
 
 private:
-	const std::vector<GameObject> objects_;
+	const std::vector<GameObject&> objects_;
 };
 
 #endif

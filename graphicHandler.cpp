@@ -2,7 +2,7 @@
 
 GraphicHandler::GraphicHandler() : objects_() {}
 
-std::vector<GameObject> GraphicHandler::GetObjects() {
+std::vector<GameObject&> GraphicHandler::GetObjects() {
 	return objects_;
 }
 
