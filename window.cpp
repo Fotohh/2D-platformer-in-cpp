@@ -5,7 +5,6 @@
 	 InitWindow(width, height, title);
 	 SetTargetFPS(60);
 	}
-
 const int Window::GetHeight() {
 	return height_;
 }
@@ -25,7 +24,10 @@ void Window::Init(GraphicHandler& handler) {
 	while (!WindowShouldClose()) {
 		BeginDrawing();
 
-		if (ticks > 0) ticks--; else handler.Tick();
+		if (ticks > 0) {
+			ticks--;
+			ticks = 60.0;
+		} else handler.Tick();
 
 		handler.Render();
 		
